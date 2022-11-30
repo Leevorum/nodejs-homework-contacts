@@ -18,7 +18,7 @@ const userUpdateAvatar = async (req, res) => {
     const avatarURL = path.join("avatars", newPathUpload);
     await userSchema.User.findByIdAndUpdate(_id, { avatarURL });
     res.json({
-      avatarURL
+      avatarURL: avatarURL
     });
   } catch (error) {
     await fs.unlink(req.file.path);
