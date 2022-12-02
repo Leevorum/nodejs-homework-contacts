@@ -6,6 +6,12 @@ const { controllerlWrapper } = require("../../helpers");
 const router = express.Router();
 
 router.post("/users/signup", validationBody(userSchema.registerSchema), controllerlWrapper(authControllers.register));
+router.get("/users/verify/:verificationToken", controllerlWrapper(authControllers.emailverification));
+router.post(
+  "/users/verify",
+  validationBody(userSchema.verifyEmailSchema),
+  controllerlWrapper(authControllers.resendVerifyEmail)
+);
 router.post("/users/login", validationBody(userSchema.loginSchema), controllerlWrapper(authControllers.login));
 router.get("/users/logout", authenticate, controllerlWrapper(authControllers.logout));
 router.get("/users/current", authenticate, controllerlWrapper(authControllers.currentUser));
